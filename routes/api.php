@@ -22,3 +22,9 @@ Route::prefix('user')->group(function () {
     Route::post('login','API\UserController@login')->name('user.login');
 });
 
+
+Route::apiResource('product', 'API\Product\ProductController');
+Route::prefix('product')->group(function(){
+    Route::apiResource('{product}/review', 'API\Product\ReviewController');
+});
+
