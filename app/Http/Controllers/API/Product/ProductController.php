@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product\Product;
+use App\Http\Resources\Product\ProductResource;
 
 
 class ProductController extends Controller
@@ -16,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = new Product();
+        return $product->paginate(5);
     }
 
     /**
@@ -48,7 +50,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return new ProductResource($product);
     }
 
     /**
