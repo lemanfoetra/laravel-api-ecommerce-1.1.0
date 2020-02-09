@@ -21,6 +21,9 @@ class ProductResource extends JsonResource
             'total_price'   => round($this->price - (($this->discount / 100) * $this->price)),
             'stock'     => $this->stock,
             'discount'  => $this->discount,
+            'product'   =>[
+                'link'  => route('product.show',$this->id),
+            ],
             'review'    => [
                 'link'  => route('review.store',$this->id),
             ],
