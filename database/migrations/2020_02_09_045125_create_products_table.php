@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unisigned()->index();
             $table->string('name',255);
-            $table->string('detail');
+            $table->longText('detail');
             $table->integer('price');
             $table->integer('discount');
             $table->integer('stock');

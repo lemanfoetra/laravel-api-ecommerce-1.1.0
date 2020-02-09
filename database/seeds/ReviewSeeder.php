@@ -12,5 +12,6 @@ class ReviewSeeder extends Seeder
     public function run()
     {
         //
+        factory(App\Models\Product\Review::class, 20)->create();
     }
 }
