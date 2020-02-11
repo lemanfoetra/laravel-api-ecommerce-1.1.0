@@ -139,6 +139,26 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $user = Auth::user();
+
+        if($user->id == $product->user_id){
+            $product->where('id', $product->id);
+            $product->delete();
+
+            return response()->json(
+                [
+                    'status'    =>  'success',
+                    'message'   =>  'Produk Dihapus',
+                ], 
+                200
+            );
+        }
+        return response()->json(
+            [
+                'status'    =>  'failed',
+                'message'   =>  'Produk Gagal Dihapus',
+            ], 
+            200
+        );
     }
 }
