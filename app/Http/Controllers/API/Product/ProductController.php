@@ -89,6 +89,9 @@ class ProductController extends Controller
         //
     }
 
+
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -98,8 +101,35 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $user = Auth::user();
+
+        if($user->id == $product->user_id){
+            if(isset($request['user_id'])){
+                unset($request['user_id']);
+            }
+            $product->update($request->all());
+
+            return response()->json(
+                [
+                    'status'    =>  'success',
+                    'message'   =>  'Produk disimpan',
+                    'result'    =>  $request->all(),
+                ], 
+                200
+            );
+        }
+        
+        return response()->json(
+            [
+                'status'    =>  'gagal',
+                'message'   =>  'Produk gagal disimpan',
+            ], 
+            200
+        );
     }
+
+
+    
 
     /**
      * Remove the specified resource from storage.
