@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('user')->group(function () {
     Route::get('/','API\UserController@index')->name('user.index');
     Route::post('login','API\UserController@login')->name('user.login');
+    Route::get('detail','API\UserController@details')->name('user.detail');
 });
 
 

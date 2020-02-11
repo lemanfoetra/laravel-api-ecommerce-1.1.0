@@ -40,4 +40,13 @@ class UserController extends Controller
             return response()->json(['error'=>'User Tidak Terdaftar'], 401);
         }
     }
+
+
+    
+
+    public function details()
+    {
+        $user = Auth::user();
+        return response()->json(['success' => $user], 200);
+    }
 }
