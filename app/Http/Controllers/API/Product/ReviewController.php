@@ -88,6 +88,8 @@ class ReviewController extends Controller
         return $review;
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -121,8 +123,28 @@ class ReviewController extends Controller
      * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy(Product $product, Review $review)
     {
-        //
+        $user = Auth::user();
+        if($product->id == $review->product_id AND $product->user_id == $user->id){
+            $review->where('id', $review->id);
+            $result = $review->delete();
+            if($result){
+                return response()->json(
+                    [
+                        'status'    =>  'success',
+                        'message'   =>  'Review Berhasil dihapus',
+                    ], 
+                    200
+                );
+            }
+        }
+        return response()->json(
+            [
+                'status'    =>  'failed',
+                'message'   =>  'Review gagal dihapus',
+            ], 
+            404
+        );
     }
 }
