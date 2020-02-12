@@ -7,6 +7,9 @@ use App\Models\Product\Product;
 
 class Review extends Model
 {
+    protected $fillable = [
+        'product_id', 'customer', 'review', 'star'
+    ];
     
     public function product()
     {

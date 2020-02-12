@@ -12,7 +12,7 @@ use App\Http\Requests\Product\ProductStore;
 
 class ProductController extends Controller
 {
-
+ 
 
     public function __construct()
     {
@@ -124,7 +124,7 @@ class ProductController extends Controller
                 'status'    =>  'gagal',
                 'message'   =>  'Produk gagal disimpan',
             ], 
-            200
+            404
         );
     }
 
