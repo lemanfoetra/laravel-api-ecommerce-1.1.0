@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -49,7 +51,26 @@ class Handler extends ExceptionHandler
      * @throws \Exception
      */
     public function render($request, Exception $exception)
-    {
+    {   
+
+        // EXCEPTION KHUSUS UNTUK PENGGUNA API
+        if($request->expectsJson()){
+
+            if($exception instanceof ModelNotFoundException){
+                return response()->json([
+                    'status'    => 'error',
+                    'message'   => 'Halaman yang dituju tidak tersedia',
+                ], 404);
+            }
+    
+            if($exception instanceof NotFoundHttpException){
+                return response()->json([
+                    'status'    => 'error',
+                    'message'   => 'route salah',
+                ], 404);
+            }
+        }
+
         return parent::render($request, $exception);
     }
 }
