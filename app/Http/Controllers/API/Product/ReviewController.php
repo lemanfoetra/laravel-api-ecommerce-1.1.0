@@ -99,6 +99,8 @@ class ReviewController extends Controller
         //
     }
 
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -106,9 +108,11 @@ class ReviewController extends Controller
      * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Review $review)
+    public function update(Product $product, Request $request, Review $review)
     {
-        //
+        $review->where('id', $review->id);
+        $result = $review->update($request->all());
+        return $request;
     }
 
     /**
